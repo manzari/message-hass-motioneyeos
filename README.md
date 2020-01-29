@@ -1,24 +1,24 @@
-# Motioneye MQTT
-A simple script to alert homeassistant via mqtt
-- uses the binary_sensor component
-- has autodiscovery
+# Motioneye Homeassistant MQTT
+A simple script to alert homeassistant via MQTT
+- uses the [binary_sensor](https://www.home-assistant.io/integrations/binary_sensor.mqtt/) component
+- has [autodiscovery](https://www.home-assistant.io/docs/mqtt/discovery/)
 
 ## Install
 ### Pre build binary
 ```bash
-curl https://tba/latest/updatemqttmotion --output /data/updatemqttmotion \
+curl https://github.com/manzari/motioneyeos_mqtt/releases/download/latest/updatemqttmotion --output /data/updatemqttmotion \
     && chmod +x /data/updatemqttmotion
 ```
 
 ### Build
 ```bash
 env GOOS=linux GOARCH=arm GOARM=5 \
-go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_mqtt #gosetup
+go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_mqtt
 ```
 
 ## Configure
 ### Config File
-`/data/etc/updatemqttmotion.json`
+Edit the file `/data/etc/updatemqttmotion.json` to suit your needs
 ```json
 {
   "Host": "192.168.178.33:1883",
@@ -29,7 +29,8 @@ go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_mqtt #gosetu
   "BaseTopic": "homeassistant",
   "DeviceName": "entrance_camera_motion",
   "DeiceFriendlyName": "Entrance Motion",
-  "DeviceClass": "motion"
+  "DeviceClass": "motion",
+  "AutoConfig": true
 }
 ```
 ### MotionEye UI
