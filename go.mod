@@ -1,4 +1,4 @@
-module github.com/manzari/motioneyeos_mqtt
+module github.com/manzari/motioneyeos_homeassistant_mqtt
 
 go 1.13
 

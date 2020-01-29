@@ -6,14 +6,14 @@ A simple script to alert homeassistant via MQTT
 ## Install
 ### Pre build binary
 ```bash
-curl https://github.com/manzari/motioneyeos_mqtt/releases/download/latest/updatemqttmotion --output /data/updatemqttmotion \
+curl https://github.com/manzari/motioneyeos_homeassistant_mqtt/releases/download/latest/updatemqttmotion --output /data/updatemqttmotion \
     && chmod +x /data/updatemqttmotion
 ```
 
 ### Build
 ```bash
 env GOOS=linux GOARCH=arm GOARM=5 \
-go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_mqtt
+go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_homeassistant_mqtt
 ```
 
 ## Configure
