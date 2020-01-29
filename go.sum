@@ -1,0 +1,4 @@
+github.com/huin/mqtt v0.0.0-20130822132849-c2d0e7ca9387 h1:up28I8H4om1pBqko419mHIwYFheJmRqTF3YrNfjkMyg=
+github.com/huin/mqtt v0.0.0-20130822132849-c2d0e7ca9387/go.mod h1:zbO4h3NDGxpAVWGYzQNle+BDfuwm8fWcgVxFuIHyuas=
+github.com/jeffallen/mqtt v0.0.0-20180518073322-5387cfa89df0 h1:ESdZtIOKF9F7Ah9lbdKyc0xiioZvnGe3XrvXzgEka0Y=
+github.com/jeffallen/mqtt v0.0.0-20180518073322-5387cfa89df0/go.mod h1:5VmMaANxUXHvNfKSdcjuEYlAFnxsu6vVAr6kgQOoUG4=
