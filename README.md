@@ -3,18 +3,25 @@ A simple script to alert homeassistant via MQTT
 - uses the [binary_sensor](https://www.home-assistant.io/integrations/binary_sensor.mqtt/) component
 - has [autodiscovery](https://www.home-assistant.io/docs/mqtt/discovery/)
 
+Its meant to be used by [motioneye](https://github.com/ccrisan/motioneye) 
+
 ## Install
+Install on a Raspberry Pi running [motioneyeos](https://github.com/ccrisan/motioneyeos)
 ### Pre build binary
 ```bash
-curl https://github.com/manzari/motioneyeos_homeassistant_mqtt/releases/download/latest/updatemqttmotion --output /data/updatemqttmotion \
-    && chmod +x /data/updatemqttmotion
+curl https://github.com/manzari/message-homeassistant-mqtt-motioneyeos/releases/download/latest/updatemqttmotion --output /data/updatemqttmotion \
+    && chmod +x /data/updatemqttmotion \
+    && /data/updatemqttmotion
 ```
 
-### Build
+### Build from source
 ```bash
 env GOOS=linux GOARCH=arm GOARM=5 \
-go build -o ./build/updatemqttmotion github.com/manzari/motioneyeos_homeassistant_mqtt
+go build -o ./build/updatemqttmotion
 ```
+- copy over the binary from the host`./build/updatemqttmotion` to motioneyeos `/data/updatemqttmotion`
+- make it executable `chmod +x /data/updatemqttmotion`
+- run it once to generate the default config `/data/updatemqttmotion`
 
 ## Configure
 ### Config File
