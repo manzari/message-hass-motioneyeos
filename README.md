@@ -3,18 +3,24 @@ A simple script to update motion state in Homeassistant via MQTT
 - uses the [binary_sensor](https://www.home-assistant.io/integrations/binary_sensor.mqtt/) component
 - has [autodiscovery](https://www.home-assistant.io/docs/mqtt/discovery/)
 
+Its meant to be used by [motioneye](https://github.com/ccrisan/motioneye) 
+
 ## Install
+Install on a Raspberry Pi running [motioneyeos](https://github.com/ccrisan/motioneyeos)
 ### Pre build binary
 ```bash
 curl https://github.com/manzari/message-hass-motioneyeos/releases/download/latest/message-hass --output /data/message-hass \
     && chmod +x /data/message-hass
 ```
 
-### Build
+### Build from source
 ```bash
 env GOOS=linux GOARCH=arm GOARM=5 \
-go build -o ./build/message-hass ./message-hass.go
+go build -o ./build/message-hass
 ```
+- copy over the binary from the host`./build/updatemqttmotion` to motioneyeos `/data/updatemqttmotion`
+- make it executable `chmod +x /data/updatemqttmotion`
+- run it once to generate the default config `/data/updatemqttmotion`
 
 ## Configure
 ### Config File
