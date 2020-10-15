@@ -13,7 +13,7 @@ import (
 )
 
 var config MqttConfig
-var configPath = "/data/etc/updatemqttmotion.json"
+var configPath = "/data/etc/hass.json"
 
 type MqttConfig struct {
 	Host              string
@@ -69,7 +69,7 @@ func main() {
 
 	flag.Parse()
 	if flag.Arg(0) != "ON" && flag.Arg(0) != "OFF" {
-		fmt.Fprintln(os.Stderr, "usage: updatemqttmotion <ON/OFF>")
+		fmt.Fprintln(os.Stderr, "usage: message-hass <ON/OFF>")
 		os.Exit(1)
 	}
 
