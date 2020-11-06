@@ -15,6 +15,12 @@ import (
 var config MqttConfig
 var configPath = "/data/etc/hass.json"
 
+type CameraConfig struct {
+	DeviceName        string
+	DeiceFriendlyName string
+	DeviceClass       string
+}
+
 type MqttConfig struct {
 	Host              string
 	User              string
@@ -22,10 +28,8 @@ type MqttConfig struct {
 	Dump              bool
 	Retain            bool
 	BaseTopic         string
-	DeviceName        string
-	DeiceFriendlyName string
-	DeviceClass       string
 	AutoConfig        bool
+  Cameras           []CameraConfig
 }
 
 type ConfigMessage struct {
@@ -43,9 +47,13 @@ func main() {
 			Dump:              false,
 			Retain:            false,
 			BaseTopic:         "homeassistant",
-			DeviceName:        "entrance_camera_motion",
-			DeiceFriendlyName: "Entrance Motion",
-			DeviceClass:       "motion",
+      Cameras: []CameraConfig{
+        {
+			    DeviceName:        "entrance_camera_motion",
+			    DeiceFriendlyName: "Entrance Motion",
+			    DeviceClass:       "motion",
+        },
+      },
 			AutoConfig:        true,
 		}
 		defaultConfigJson, _ := json.Marshal(defaultConfig)
@@ -67,11 +75,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	flag.Parse()
+  index := flag.Int("cam", 0, "Index of the camera in the config.  Defaults to the first camera")
+
+  flag.Parse()
 	if flag.Arg(0) != "ON" && flag.Arg(0) != "OFF" {
-		fmt.Fprintln(os.Stderr, "usage: message-hass <ON/OFF>")
+		fmt.Fprintln(os.Stderr, "usage: message-hass -cam=<INDEX> <ON/OFF>")
 		os.Exit(1)
 	}
+
+  if *index >= len(config.Cameras) {
+    fmt.Fprint(os.Stderr, "Failed to load camera in config file at index: ", *index)
+    os.Exit(1)
+  }
 
 	conn, err := net.Dial("tcp", config.Host)
 	if err != nil {
@@ -86,10 +101,12 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Println("Connected with client id", cc.ClientId)
-	stateTopic := config.BaseTopic + "/binary_sensor/" + config.DeviceName + "/state"
+
+  camera := config.Cameras[*index]
+	stateTopic := config.BaseTopic + "/binary_sensor/" + camera.DeviceName + "/state"
 	if config.AutoConfig {
-		configTopic := config.BaseTopic + "/binary_sensor/" + config.DeviceName + "/config"
-		configMessage := ConfigMessage{config.DeiceFriendlyName, config.DeviceClass, stateTopic}
+		configTopic := config.BaseTopic + "/binary_sensor/" + camera.DeviceName + "/config"
+		configMessage := ConfigMessage{camera.DeiceFriendlyName, camera.DeviceClass, stateTopic}
 		jsonConfigMessage, err := json.Marshal(&configMessage)
 		if err != nil {
 			fmt.Fprint(os.Stderr, "json marshal failed: ", err)

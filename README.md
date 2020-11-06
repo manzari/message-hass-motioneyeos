@@ -33,9 +33,13 @@ Edit the file `/data/etc/hass.json` to suit your needs
   "Dump": false,
   "Retain": false,
   "BaseTopic": "homeassistant",
-  "DeviceName": "entrance_camera_motion",
-  "DeiceFriendlyName": "Entrance Motion",
-  "DeviceClass": "motion",
+  "Cameras": [
+    {
+      "DeviceName": "entrance_camera_motion",
+      "DeiceFriendlyName": "Entrance Motion",
+      "DeviceClass": "motion"
+    }
+  ],
   "AutoConfig": true
 }
 ```
@@ -45,3 +49,6 @@ Edit the file `/data/etc/hass.json` to suit your needs
 - Enter `bash -c "/data/updatemqttmotion ON"` into the field `Run A Command`
 - Enter `bash -c "/data/updatemqttmotion OFF"` into the field `Run An End Command`
 
+####For additional cameras
+- Enter `bash -c "/data/updatemqttmotion -cam=1 ON"` into the field `Run A Command`
+- Enter `bash -c "/data/updatemqttmotion -cam=1 OFF"` into the field `Run An End Command`
