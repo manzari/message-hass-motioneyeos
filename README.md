@@ -9,7 +9,7 @@ Its meant to be used by [motioneye](https://github.com/ccrisan/motioneye)
 Install on a Raspberry Pi running [motioneyeos](https://github.com/ccrisan/motioneyeos)
 ### Pre build binary
 ```bash
-curl https://github.com/manzari/message-hass-motioneyeos/releases/download/latest/message-hass --output /data/message-hass \
+curl https://github.com/manzari/message-hass-motioneyeos/releases/latest/download/message-hass --output /data/message-hass \
     && chmod +x /data/message-hass
 ```
 
